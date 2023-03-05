@@ -41,7 +41,7 @@ def main():
     else:
         sys.exit()
         
-    max_height = compute_heights(n, parents)
+    max_height = compute_height(n, parents)
     print(max_height)
 
 sys.setrecursionlimit(10**7)  # max depth of recursion
