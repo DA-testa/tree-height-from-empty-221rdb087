@@ -33,7 +33,7 @@ def main():
       if "a" in file_name:
           sys.exit()
       try:
-          with open("test/" + file_name, "r") as file:
+          with open(file_name, "r") as file:
               n = int(file.readline().strip())
               parents = list(map(int, input().strip().split()))
       except FileNotFoundError:
