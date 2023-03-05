@@ -24,11 +24,23 @@ def compute_height(n, parents):
         
 
 def main():
-
-      n = int(input().strip())
-      parents = list(map(int, input().strip().split()))
-      max_height = compute_height(n,parents) 
-      print(max_height)
+    source = input().strip()
+    if source == "I":
+        n = int(input().strip())
+        parents = list(map(int, input().strip().split()))
+    elif source == "F":
+        file_name = input().strip()
+        if "a" in file_name:
+            sys.exit()
+        try:
+            with open(file_name, "r") as file:
+                n = int(file.readline().strip())
+                parents = list(map(int, file.readline().strip().split()))
+        except FileNotFoundError:
+            sys.exit()
+    else:
+        sys.exit()
+        
 
 
 sys.setrecursionlimit(10**7)  # max depth of recursion
