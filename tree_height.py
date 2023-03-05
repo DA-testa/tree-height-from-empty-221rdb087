@@ -7,29 +7,21 @@ import numpy
 
 def compute_height(n, parents):
     # Write this function
-    heights = [0]*n
-    
+    children = {}    
     for i in range(n):
-        if heights[i] !=0:
-            continue
-    
-        height = 0
-        while i != -1:
-            
-            if heights[parents[i]] != 0:
-                height += heights[parents[i]]
-                break
-            height += 1
-            i = parents[i]
-            
-        j = i
-        while j != -1:
-            if heights[j] != 0:
-                break
-            heights[j] = height
-            height -= 1
-            j = parents[j]
-    return max(heights)
+        children[i] = []
+    for i, parent in enumerate(parents):
+        if parent == -1:
+            root = i
+        else:
+            children[parent].append(i)
+    def calc_height(node):
+        if not children[node]:
+            return 0
+        else:
+            return 1+max([calc_height(child) for child in children[node]])
+    return calc_height(root)
+        
 
 def main():
    n = int(input().strip())
