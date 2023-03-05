@@ -1,31 +1,27 @@
+# python 3
 import sys
 import threading
-
 def compute_height(n, parents):
-    children = {i: [] for i in range(n)}
-    
+    children = {}
+    for i in range(n):
+        children[i] = []
     for i, parent in enumerate(parents):
-        if parent != -1:
+        if parent == -1:
+            root = i
+        else:
             children[parent].append(i)
     def calc_height(node):
         if not children[node]:
-            return 1
+            return 0
         else:
-            return 1 + max([calc_height(child) for child in children[node]])
-        
-    max_height = 0
-    for i in range(n):
-        height = calc_height(i)
-        if height > max_height:
-            max_height = height
-    return max_height
+            return 1+max([calc_height(child) for child in children[node]])
+    return calc_height(root)
 
 def main():
-    # read input
-    source = input()
+    source = input().strip()
     if source == "I":
-        n = int(input())
-        parents = list(map(int, input().split()))
+        n = int(input().strip())
+        parents = list(map(int, input().strip().split()))
     elif source == "F":
         file_name = input().strip()
         if "a" in file_name:
@@ -38,11 +34,10 @@ def main():
             sys.exit()
     else:
         sys.exit()
-
+        
     max_height = compute_height(n, parents)
     print(max_height)
 
-sys.setrecursionlimit(10**7)
-threading.stack_size(2**27)
-
+sys.setrecursionlimit(10**7)  
+threading.stack_size(2**27)   
 threading.Thread(target=main).start()
