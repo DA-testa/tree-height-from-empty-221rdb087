@@ -24,9 +24,9 @@ def compute_height(n, parents):
         
 
 def main():
-    source = input().strip()
+    source = input()
     if source == "I":
-        n = int(input().strip())
+        n = int(input())
         parents = list(map(int, input().strip().split()))
     elif source == "F":
         file_name = input().strip()
