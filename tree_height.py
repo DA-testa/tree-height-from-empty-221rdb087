@@ -1,6 +1,6 @@
-# python 3
 import sys
 import threading
+
 
 def compute_height(n, parents):
     children = {}
@@ -13,10 +13,11 @@ def compute_height(n, parents):
             children[parent].append(i)
     def calc_height(node):
         if not children[node]:
-            return 1
+            return 0
         else:
             return 1+max([calc_height(child) for child in children[node]])
     return calc_height(root)
+
 
 def main():
     source = input().strip()
@@ -35,10 +36,11 @@ def main():
             sys.exit()
     else:
         sys.exit()
-
+        
     max_height = compute_height(n, parents)
     print(max_height)
 
-sys.setrecursionlimit(10**7)
-threading.stack_size(2**27)
+
+sys.setrecursionlimit(10**7)  
+threading.stack_size(2**27)   
 threading.Thread(target=main).start()
