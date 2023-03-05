@@ -13,7 +13,7 @@ def compute_height(n, parents):
             children[parent].append(i)
     def calc_height(node):
         if not children[node]:
-            return 0
+            return 1
         else:
             return 1+max([calc_height(child) for child in children[node]])
     return calc_height(root)
