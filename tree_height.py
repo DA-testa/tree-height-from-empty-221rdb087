@@ -1,24 +1,18 @@
 import sys
 import threading
 
-# modified compute_height function
 def compute_height(n, parents):
-    # create a dictionary to store children of each node
     children = {i: [] for i in range(n)}
-
-    # fill in the children dictionary
+    
     for i, parent in enumerate(parents):
         if parent != -1:
             children[parent].append(i)
-
-    # recursive function to calculate the height of each node
     def calc_height(node):
         if not children[node]:
             return 1
         else:
             return 1 + max([calc_height(child) for child in children[node]])
-
-    # calculate the height of each node and return the maximum height
+        
     max_height = 0
     for i in range(n):
         height = calc_height(i)
