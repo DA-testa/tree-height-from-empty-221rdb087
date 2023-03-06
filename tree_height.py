@@ -1,7 +1,6 @@
 import sys
 import threading
 import numpy
-
 def compute_height(n, parents):
     children = {}
     for i in range(n):
@@ -35,11 +34,15 @@ def main():
             sys.exit()
     else:
         sys.exit()
-        
-    max_height = compute_height(n, parents)
+    max_height = 0
+    def compute_max_height():
+        nonlocal max_height
+        max_height = compute_height(n, parents)
+    thread = threading.Thread(target=compute_max_height)
+    thread.start()
+    thread.join()
     print(max_height)
-
-
+    
 sys.setrecursionlimit(10**7)  
 threading.stack_size(2**27)   
 threading.Thread(target=main).start()
